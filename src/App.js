@@ -1,25 +1,16 @@
 
 import './App.css';
-import Condicional from './components/Condicional';
-import Evento from './components/Evento'
-import Pessoa from './components/Pessoa';
+import OutraLista from './components/OutraLista';
 
 function App() {
-    const nome = "Maria";
+    const meusItens = ["React", "Angular", "Vue"];
 
   return (
 
     <div className="App">
-      <h1>Rendenização condicional</h1>
-      <Condicional/>
-      <Evento/>
-      <Pessoa
-      nome="Gustavo Gomes"
-      idade="20"
-      profissao="Programador"
-      foto="https://via.placeholder.com/150"
-      />
-
+      <h1>Rendenização de listas</h1>
+      <OutraLista itens={meusItens}/>
+      <OutraLista itens={[]}/>
     </div>
   )
 }
