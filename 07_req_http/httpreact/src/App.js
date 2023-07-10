@@ -1,16 +1,20 @@
 import './App.css';
 import {useState, useEffect} from "react";
+import { useFetch } from "./hooks/useFetch";
 
 const url = "http://localhost:3000/products";
 
 function App() {
   const [products, setProducts] = useState([]);
 
+  // 4 - custom hook
+  const { data: items, httpConfig, loading, error } = useFetch(url);
+
   const [name , setName] = useState("");
   const [price , setPrice] = useState("");
 
   // 1 - Resgatando dados
-  useEffect( () => {
+  /* useEffect( () => {
     async function fetchData(){
     const res = await fetch(url);
 
@@ -19,7 +23,7 @@ function App() {
     setProducts(data);
     }
     fetchData();
-    }, []);
+    }, []); */
 
     // 2 - add products
     const handleSubmit = async (e) => {
@@ -30,7 +34,7 @@ function App() {
         price
       };
 
-      const res = await fetch(url, {
+      /* const res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -40,23 +44,33 @@ function App() {
 
       // 3 - carergamento dinamico
       const addedProduct = await res.json();
-      setProducts((prevProducts) => [...prevProducts, addedProduct]);
+      setProducts((prevProducts) => [...prevProducts, addedProduct]); */
+
+      // 5 - refatorando post
+      httpConfig(product, "POST")
 
       setName("");
       setPrice("");
     };
 
-
-  console.log(products);
+    // 8 - desafio 6
+    const handleRemove = (id) => {
+      httpConfig(id, "DELETE");
+    }
 
   return (
     <div className="App">
       <h1>Lista de produtos</h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id} >{product.name} - R${product.price}</li>
+      {/* 6 - loading */}
+      {loading && <p>Carregando dados...</p>}
+      {error && <p>{error}</p>}
+      {!error && <ul>
+        {items && items.map((product) => (
+          <li key={product.id} >{product.name} por apenas R${product.price}
+          <button onClick={() => handleRemove(product.id)} >Excluir</button></li>
         ))}
-      </ul>
+      </ul>}
+      
       <div className="add-product">
         <form action="" onSubmit={handleSubmit}>
           <label htmlFor="">
@@ -67,7 +81,11 @@ function App() {
             Preço:
             <input type="text" value={price} name="price" onChange={(e) => setPrice(e.target.value)} />
           </label>
-          <input type="submit" value="Criar" />
+          {/* 7 - state de loading no post */}
+          { !loading ? 
+          <input type="submit" value="Criar" /> : 
+          <input type="submit" value="Aguarde" disabled /> }
+          
         </form>
       </div>
     </div>

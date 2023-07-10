@@ -39,6 +39,16 @@
       "name": "Shorts Jeans",
       "price": "90.00",
       "id": 8
+    },
+    {
+      "name": "Conjunto moletom",
+      "price": "120.00",
+      "id": 9
+    },
+    {
+      "name": "Pijama feminino",
+      "price": "120.00",
+      "id": 10
     }
   ]
 }
