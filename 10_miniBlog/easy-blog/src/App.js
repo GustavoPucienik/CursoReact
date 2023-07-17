@@ -19,6 +19,9 @@ import Login from './pages/Login/Login';
 import Register from './pages/register/Register';
 import CreatePost from './pages/createpost/CreatePost';
 import Dashboard from './pages/dashboard/Dashboard';
+import Search from './pages/Search/Search';
+import Post from './pages/Post/Post';
+import EditPost from './pages/EditPost/EditPost';
 //import EditPost from "./pages/EditPost/EditPost";
 
 function App() {
@@ -53,12 +56,12 @@ function App() {
                 path="/posts/create"
                 element={user ? <CreatePost /> : <Navigate to="/login" />}
               />
-              {/* <Route
-                path="/posts/edit/:id"
-                element={user ? <EditPost /> : <Navigate to="/login" />}
+              <Route
+                path="dashboard/posts/edit/:id"
+                element={user ? <EditPost/> : <Navigate to="/login" />}
               />
-              <Route path="/posts/:id" element={<Post />} />
-              <Route path="/search" element={<Search />} /> */}
+              <Route path='/posts/:id' element={<Post/>}/>
+              <Route path="/search" element={<Search />} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
