@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const schema = mongoose;
+const {Schema} = mongoose;
 
 const userSchema = new Schema(
    {
@@ -9,10 +9,10 @@ const userSchema = new Schema(
      profileImage: String,
      bio: String,
    },{
-      timestamps: true
+      timestamps: true,
    }
-)
+);
 
-const user = mongoose.model("user", userSchema);
+ const User = mongoose.model("User", userSchema);
 
 module.exports = User;
